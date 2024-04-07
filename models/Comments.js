@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
-
+const constants=require("../common/constants");
 const CommentSchema=new Schema({
     comment:{
         type:String,
@@ -16,12 +16,6 @@ const CommentSchema=new Schema({
     parentId:{
         type:ObjectId,
         ref:"Posts",
-        default:null,
-        index:true
-    },
-    commentId:{
-        type:ObjectId,
-        ref:"Comments",
         default:null,
         index:true
     },
@@ -41,6 +35,10 @@ const CommentSchema=new Schema({
         type:Boolean,
         default:false
     }
+    // commentType:{
+    //     type:Number,
+    //     enum:Object.values(constants.COMMENT_TYPE)
+    // }
 },{
     timestamps:true
 });

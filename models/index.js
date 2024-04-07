@@ -4,5 +4,7 @@ module.exports={
     Otp:require("./Otp"),
     Likes:require("./Likes"),
     Posts:require("./Posts"),
-    Comments:require("./Comments")
+    Comments:require("./Comments"),
+    Category:require("./Category"),
+    AccessRole:require("./AccessRole")
 };

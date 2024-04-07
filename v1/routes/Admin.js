@@ -13,4 +13,29 @@ router.post("/forgetPassword",Controller.AdminController.forgotPassword);
 router.post("/verifyOtp",Controller.AdminController.verifyOtp);
 router.post("/resetPassword",Auth.verify("admin"),Controller.AdminController.resetPassword);
 
+
+// delete user
+router.delete("/deleteUser/:id",Auth.verify("admin"),Controller.AdminController.deleteUser);
+
+// subadmin
+router.post("/addSubAdmin",Auth.verify("admin"),Controller.AdminController.addSubAdmin);
+
+//category
+router.post("/addCategory",Auth.verify("admin"),Controller.AdminController.addCategory);
+router.put("/editCategory",Auth.verify("admin"),Controller.AdminController.editCategory);
+router.get("/getCategory",Auth.verify("admin"),Controller.AdminController.getCategory);
+router.delete("/deleteCategory",Auth.verify("admin"),Controller.AdminController.deleteCategory);
+
+//subcategory
+router.post("/addSubCategory",Auth.verify("admin"),Controller.AdminController.addCategory);
+router.put("/editSubCategory",Auth.verify("admin"),Controller.AdminController.editCategory);
+router.get("/getSubCategory",Auth.verify("admin"),Controller.AdminController.getCategory);
+router.delete("/deleteSubCategory",Auth.verify("admin"),Controller.AdminController.deleteCategory);
+
+
+
+
 module.exports=router;
+
+
+

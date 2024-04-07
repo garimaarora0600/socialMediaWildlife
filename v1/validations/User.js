@@ -76,3 +76,25 @@ module.exports.addLikes=Joi.object({
     postId:Joi.string().optional(),
     commentId:Joi.string().optional()
 });
+
+module.exports.addPosts=Joi.object({
+    image:Joi.string().optional(),
+    video:Joi.string().optional(),
+    text:Joi.string().optional(),
+    categoryId:Joi.string().optional(),
+    subCategoryId:Joi.string().optional()
+});
+module.exports.addComments=Joi.object({
+    comment:Joi.string().required(),
+    postId:Joi.string().optional(),
+    // parentId:Joi.string().optional()
+});
+
+module.exports.updatePosts=Joi.object({
+    text:Joi.string().optional(),
+    image:Joi.string().optional(),
+    video:Joi.string().optional()
+});
+module.exports.editComment=Joi.object({
+    comment:Joi.string().optional()
+});

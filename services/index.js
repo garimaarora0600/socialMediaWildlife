@@ -1,4 +1,5 @@
 module.exports={
     EmailService:require("./EmailService"),
-    Swagger:require("./Swagger")
+    Swagger:require("./Swagger"),
+    SubAdmin:require("./SubAdmin")
 };

@@ -80,7 +80,12 @@ const AdminSchema=new Schema({
         type: String,
         default: "",
         index: true
-      }
+      },
+      accessRole: {
+        type: ObjectId,
+        ref: "AccessRole",
+        default: null
+    }
 },{
     timestamps:true
 });

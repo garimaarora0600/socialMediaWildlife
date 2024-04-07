@@ -35,14 +35,11 @@ const PostSchema = new Schema({
         ref: "Category",
         default: null
     }],
-    type: {
-        type: Number,
-        enum:  Object.values(constants.PITCH_TYPE) 
-    },
+    
     status: {
         type: Number,
-        enum: Object.values(constants.PITCH_STATUS),
-        default: constants.PITCH_STATUS.PENDING
+        enum: Object.values(constants.POST_STATUS),
+        default: constants.POST_STATUS.PENDING
     }
 }, {
     timestamps: true
