@@ -35,7 +35,41 @@ const PostSchema = new Schema({
         ref: "Category",
         default: null
     }],
-    
+    parkId: {
+        type: ObjectId,
+        ref: "Park",
+        default: null
+    },
+    visibility:{
+        type:Number,
+        default:0,
+        min:0,
+        max:5
+    },
+    traffic:{
+        type:Number,
+        default:0,
+        min:0,
+        max:3
+    },
+    time:{
+        type:Date,
+        default:new Date()
+    },
+    howManyYouSee:{
+        type:Number,
+        default:0
+    },
+    location: {
+        type: {
+          type: String,
+          default: "Point"
+        },
+        coordinates: {
+          type: [Number],
+          default: [0, 0]
+        }
+    },
     status: {
         type: Number,
         enum: Object.values(constants.POST_STATUS),

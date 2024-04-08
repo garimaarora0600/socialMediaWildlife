@@ -82,11 +82,17 @@ module.exports.addPosts=Joi.object({
     video:Joi.string().optional(),
     text:Joi.string().optional(),
     categoryId:Joi.string().optional(),
-    subCategoryId:Joi.string().optional()
+    subCategoryId:Joi.string().optional(),
+    time:Joi.date().optional(),
+    howManyYouSee:Joi.number().optional(),
+    location:Joi.object({
+        type:Joi.string().optional(),
+        coordinates:Joi.array().optional()
+    })
 });
 module.exports.addComments=Joi.object({
     comment:Joi.string().required(),
-    postId:Joi.string().optional(),
+    postId:Joi.string().optional()
     // parentId:Joi.string().optional()
 });
 

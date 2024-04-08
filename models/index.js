@@ -6,5 +6,7 @@ module.exports={
     Posts:require("./Posts"),
     Comments:require("./Comments"),
     Category:require("./Category"),
-    AccessRole:require("./AccessRole")
+    AccessRole:require("./AccessRole"),
+    Park:require("./Park"),
+    CMS:require("./Cms")
 };

@@ -123,6 +123,42 @@ const UserSchema = new Schema({
         type: String,
         default: "",
         index: true
+    },
+    location: {
+        type: {
+          type: String,
+          default: "Point"
+        },
+        coordinates: {
+          type: [Number],
+          default: [0, 0]
+        }
+    },
+    manageNotifications:{
+    allNotifications:{
+        type:Boolean,
+        default:false
+    },
+    parkNotification:{
+        type:Boolean,
+        default:false
+    },
+    like:{
+        type:Boolean,
+        default:false
+    },
+    comment:{
+        type:Boolean,
+        default:false
+    },
+    postAccepted:{
+        type:Boolean,
+        default:false
+    },
+    postRejected:{
+        type:Boolean,
+        default:false
+    }            
     }
 }, {
     timestamps: true

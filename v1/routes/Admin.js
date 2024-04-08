@@ -15,24 +15,43 @@ router.post("/resetPassword",Auth.verify("admin"),Controller.AdminController.res
 
 
 // delete user
+router.post("/addUser",Auth.verify("admin"),Controller.AdminController.addUser);
+router.put("/editUser/:id",Auth.verify("admin"),Controller.AdminController.editUser);
+router.get("/getUser/:id?",Auth.verify("admin"),Controller.AdminController.getUser);
 router.delete("/deleteUser/:id",Auth.verify("admin"),Controller.AdminController.deleteUser);
 
+// delete comment
+router.delete("/deleteComment/:id",Auth.verify("admin"),Controller.AdminController.deleteComment);
+
+// delete posts
+router.delete("/deletePost/:id",Auth.verify("admin"),Controller.AdminController.deletePosts);
+
 // subadmin
-router.post("/addSubAdmin",Auth.verify("admin"),Controller.AdminController.addSubAdmin);
+// router.post("/addSubAdmin",Auth.verify("admin"),Controller.AdminController.addSubAdmin);
 
 //category
 router.post("/addCategory",Auth.verify("admin"),Controller.AdminController.addCategory);
-router.put("/editCategory",Auth.verify("admin"),Controller.AdminController.editCategory);
-router.get("/getCategory",Auth.verify("admin"),Controller.AdminController.getCategory);
-router.delete("/deleteCategory",Auth.verify("admin"),Controller.AdminController.deleteCategory);
+router.put("/editCategory/:id",Auth.verify("admin"),Controller.AdminController.editCategory);
+router.get("/getCategory/:id?",Auth.verify("admin"),Controller.AdminController.getCategory);
+router.delete("/deleteCategory/:id",Auth.verify("admin"),Controller.AdminController.deleteCategory);
 
 //subcategory
-router.post("/addSubCategory",Auth.verify("admin"),Controller.AdminController.addCategory);
-router.put("/editSubCategory",Auth.verify("admin"),Controller.AdminController.editCategory);
-router.get("/getSubCategory",Auth.verify("admin"),Controller.AdminController.getCategory);
-router.delete("/deleteSubCategory",Auth.verify("admin"),Controller.AdminController.deleteCategory);
+router.post("/addAnimalCategory",Auth.verify("admin"),Controller.AdminController.addAnimalCategory);
+router.put("/ediAnimalCategory/:id",Auth.verify("admin"),Controller.AdminController.editAnimalCategory);
+router.get("/getAnimalCategory/:id?",Auth.verify("admin"),Controller.AdminController.getAnimalCategory);
+router.delete("/deleteAnimalCategory/:id",Auth.verify("admin"),Controller.AdminController.deleteAnimalCategory);
 
 
+// park 
+router.post("/createPark",Auth.verify("admin"),Controller.AdminController.createPark);
+router.put("/editPark/:id",Auth.verify("admin"),Controller.AdminController.updatePark);
+router.delete("/deletePark/:id",Auth.verify("admin"),Controller.AdminController.deletePark);
+router.get("/getPark/:id?",Auth.verify("admin"),Controller.AdminController.getPark);
+
+// cms
+router.post("/addCms",Auth.verify("admin"),Controller.AdminController.addCms);
+router.get("/getCms",Auth.verify("admin"),Controller.AdminController.getPark);
+router.get("/getTermsAndConditions",Auth.verify("admin"),Controller.AdminController.getTermsAndConditions);
 
 
 module.exports=router;

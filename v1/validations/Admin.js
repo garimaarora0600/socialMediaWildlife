@@ -76,3 +76,27 @@ module.exports.addSubCategory = Joi.object({
     label:Joi.string().required(),
     parentId:Joi.string().required()
 });
+module.exports.addUser = Joi.object({
+    phoneNo: Joi.string().required(),
+    dialCode: Joi.string().required(),
+    dateOfBirth: Joi.date().required(),
+    email: Joi.string().email().required().error(new Error("Please Enter a valid email")),
+    firstName: Joi.string().required(),
+    lastName: Joi.string().required(),
+    gender: Joi.string().required(),
+    image: Joi.string().required()
+});
+module.exports.createPark=Joi.object({
+    name:Joi.string().required(),
+    geofence:Joi.array({
+        type:Joi.string().required(),
+        coordinates:Joi.array().required()
+    })
+});
+module.exports.editPark=Joi.object({
+    name:Joi.string().optional(),
+    geofence:Joi.array({
+        type:Joi.string().optional(),
+        coordinates:Joi.array().optional()
+    })
+});

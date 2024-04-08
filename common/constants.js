@@ -40,7 +40,13 @@ module.exports={
         COMMENT_NOT_FOUND:"Comment not found",
         COMMENT_DELETED_SUCCESSFULLY:"Comment deleted successfully",
         POSTS_UPDATED_SUCCESSFULLY:"Post updated successfully",
-        COMMENT_UPDATED_SUCCESSFULLY:"Comment updated successfully"
+        COMMENT_UPDATED_SUCCESSFULLY:"Comment updated successfully",
+        ACCESS_DENIED:"Access denied",
+        PARK_NAME_ALREADY_EXISTS:"Park name already exists",
+        PARK_ADDED_SUCCESSFULLY:"Park added successfully",
+        PARK_DELETED_SUCCESSFULLY:"Park deleted successfully",
+        PARK_UPDATED_SUCCESSFULLY:"Park updated successfully",
+        PARK_NOT_FOUND:"Park not found"
     },
     ROLE:{
         ADMIN:1,
@@ -61,15 +67,34 @@ module.exports={
         SUBCATEGORY:2
     },
     MODULES: {
-        ADMIN: 1
+        ADMIN: 1,
+        USER:2,
+        PARK:3
     },
     POST_STATUS:{
         APPROVED:1,
         PENDING:2,
         REJECTED:3
     },
-    // COMMENT_TYPE:{
-    //     SELFPOST:1,
-    //     ANOTHERPOST:2
-    // }
+    ANIMALDOING:{
+        ONTHEMOVE:1,
+        CROSSEDROAD:2,
+        FEEDING:3,
+        INTREE:4,
+        ONAKILL:5
+    },
+    FILTER_TYPE:{
+        TINGSFROMLASTHOUR:1,
+        TINGSFROMLAST24HOUR:2,
+        TINGSFROMLAST48HOUR:3,
+        TINGSFROMLAST30DAYS:4
+    },
+    DATE_TYPE:{
+        TODAY:1,
+        OLDER:2
+    },
+    LATEST_SIGHTINGS:{
+        TRENDING:1,
+        ALL:2
+    }
 };
