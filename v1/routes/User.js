@@ -20,7 +20,7 @@ router.get("/getAnimalList",Auth.verify("user"),Controller.UserController.getAni
 // posts
 router.post("/addPost",Auth.verify("user"),Controller.UserController.addPosts);
 router.put("/editPost/:id",Auth.verify("user"),Controller.UserController.editPosts);
-router.get("/getPosts",Auth.verify("user"),Controller.UserController.getPosts);
+router.get("/getPosts/:id?",Auth.verify("user"),Controller.UserController.getPosts);
 router.delete("/deletePost/:id",Auth.verify("user"),Controller.UserController.deletePosts);
 
 // likes

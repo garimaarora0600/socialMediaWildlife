@@ -649,16 +649,19 @@ module.exports.filtersNationalPark = async (req, res, next) => {
     try {
         const startOfDay = new Date(moment().utcOffset(0).startOf("day"));
         const endOfDay = new Date(moment().utcOffset(0).endOf("day"));
+        console.log(startOfDay," ",endOfDay);
         let currentDate=moment();
         if (req.query.dateType == constants.DATE_TYPE.TODAY) {
+            console.log("inside");
             let today = await Model.Posts.find({
                 createdAt: {
                     $gte: startOfDay,
                     $lte: endOfDay
                 },
                 isDeleted: false,
-                parkId: req.query.parkId
+                parkId: ObjectId(req.query.parkId)
             });
+            console.log("today",today);
             let totalTodayPosts = today.length;
             console.log("totalTodayPosts:", totalTodayPosts);
             return res.success(constants.MESSAGES.DATA_FETCHED, {

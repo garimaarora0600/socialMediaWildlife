@@ -88,7 +88,8 @@ module.exports.addPosts=Joi.object({
     location:Joi.object({
         type:Joi.string().optional(),
         coordinates:Joi.array().optional()
-    })
+    }),
+    parkId:Joi.string().optional()
 });
 module.exports.editPosts=Joi.object({
     image:Joi.string().optional(),
