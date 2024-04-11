@@ -73,7 +73,7 @@ module.exports.editCategory = Joi.object({
 module.exports.addSubCategory = Joi.object({
     name:Joi.string().required(),
     description: Joi.string().optional(),
-    label:Joi.string().required(),
+    label:Joi.string().optional(),
     parentId:Joi.string().required()
 });
 module.exports.addUser = Joi.object({
@@ -88,14 +88,11 @@ module.exports.addUser = Joi.object({
 });
 module.exports.createPark=Joi.object({
     name:Joi.string().required(),
-    geofence:Joi.array({
-        type:Joi.string().required(),
-        coordinates:Joi.array().required()
-    })
+    geoFence:Joi.object().optional()
 });
 module.exports.editPark=Joi.object({
     name:Joi.string().optional(),
-    geofence:Joi.array({
+    geoFence:Joi.array({
         type:Joi.string().optional(),
         coordinates:Joi.array().optional()
     })

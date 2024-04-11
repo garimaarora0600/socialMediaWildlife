@@ -27,7 +27,7 @@ router.delete("/deleteComment/:id",Auth.verify("admin"),Controller.AdminControll
 router.delete("/deletePost/:id",Auth.verify("admin"),Controller.AdminController.deletePosts);
 
 // subadmin
-// router.post("/addSubAdmin",Auth.verify("admin"),Controller.AdminController.addSubAdmin);
+router.post("/addSubAdmin",Auth.verify("admin"),Controller.AdminController.addSubAdmin);
 
 //category
 router.post("/addCategory",Auth.verify("admin"),Controller.AdminController.addCategory);
@@ -37,7 +37,7 @@ router.delete("/deleteCategory/:id",Auth.verify("admin"),Controller.AdminControl
 
 //subcategory
 router.post("/addAnimalCategory",Auth.verify("admin"),Controller.AdminController.addAnimalCategory);
-router.put("/ediAnimalCategory/:id",Auth.verify("admin"),Controller.AdminController.editAnimalCategory);
+router.put("/editAnimalCategory/:id",Auth.verify("admin"),Controller.AdminController.editAnimalCategory);
 router.get("/getAnimalCategory/:id?",Auth.verify("admin"),Controller.AdminController.getAnimalCategory);
 router.delete("/deleteAnimalCategory/:id",Auth.verify("admin"),Controller.AdminController.deleteAnimalCategory);
 
@@ -50,8 +50,8 @@ router.get("/getPark/:id?",Auth.verify("admin"),Controller.AdminController.getPa
 
 // cms
 router.post("/addCms",Auth.verify("admin"),Controller.AdminController.addCms);
-router.get("/getCms",Auth.verify("admin"),Controller.AdminController.getPark);
-router.get("/getTermsAndConditions",Auth.verify("admin"),Controller.AdminController.getTermsAndConditions);
+router.get("/getCms",Auth.verify("admin"),Controller.AdminController.getCms);
+// router.get("/getTermsAndConditions",Auth.verify("admin"),Controller.AdminController.getTermsAndConditions);
 
 
 module.exports=router;

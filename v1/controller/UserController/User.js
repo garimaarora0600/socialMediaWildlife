@@ -376,7 +376,7 @@ module.exports.getAllLikes=async(req,res,next)=>{
     }catch(error){
         next(error);
     }
-}
+};
 
 module.exports.addPosts = async (req, res, next) => {
     try {
@@ -649,14 +649,15 @@ module.exports.filtersNationalPark = async (req, res, next) => {
     try {
         const startOfDay = new Date(moment().utcOffset(0).startOf("day"));
         const endOfDay = new Date(moment().utcOffset(0).endOf("day"));
-        if (req.body.dateType == constants.DATE_TYPE.TODAY) {
-            let today = await Model.Posts.findOne({
+        let currentDate=moment();
+        if (req.query.dateType == constants.DATE_TYPE.TODAY) {
+            let today = await Model.Posts.find({
                 createdAt: {
                     $gte: startOfDay,
                     $lte: endOfDay
                 },
                 isDeleted: false,
-                parkId: req.body.parkId
+                parkId: req.query.parkId
             });
             let totalTodayPosts = today.length;
             console.log("totalTodayPosts:", totalTodayPosts);
@@ -667,13 +668,10 @@ module.exports.filtersNationalPark = async (req, res, next) => {
         } else {
             let older = await Model.Posts.findOne({
                 createdAt: {
-                    $ne: {
-                        $gte: startOfDay,
-                        $lte: endOfDay
-                    }
+                    $ne: currentDate
                 },
                 isDeleted: false,
-                parkId: req.body.parkId
+                parkId: req.query.parkId
             });
             return res.success(constants.MESSAGES.DATA_FETCHED, older);
         }
@@ -815,7 +813,30 @@ module.exports.manageNotifications=async(req,res,next)=>{
                 new:true
             });
         }else{
-            
+            let qry={};
+            if(req.query.parkNotifications){
+                qry.parkNotifications=true;
+            }
+            if(req.query.like){
+                qry.like=true;
+            }
+            if(req.query.comment){
+                qry.comment=true;
+            }
+            if(req.query.postAccepted){
+                qry.postAccepted=true;
+            }
+            if(req.query.postRejected){
+                qry.postRejected=true;
+            }
+            await Model.User.findOneAndUpdate({
+                _id:req.user._id,
+                isDeleted:false
+            },{
+                $set:qry
+            },{
+                new:true
+            });
         }
         return res.success(constants.MESSAGES.NOTIFICATIONS_FILTER_APPLIED,{});
     }catch(error){

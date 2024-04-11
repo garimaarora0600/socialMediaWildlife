@@ -5,7 +5,7 @@ const constants = require("../../../common/constants");
 const functions = require("../../../common/functions");
 const services = require("../../../services");
 const mongoose = require("mongoose");
-const ObjectId = mongoose.Types.ObjectId;
+const ObjectId =mongoose.Types.ObjectId;
 
 module.exports.signup = async (req, res, next) => {
     try {
@@ -288,7 +288,7 @@ module.exports.deleteUser = async (req, res, next) => {
         next(error);
     }
 };
-module.exports.editUser = async (req, res, next) {
+module.exports.editUser = async (req, res, next)=> {
     try {
         req.query.sideBarId = constants.MODULES.USER;
         req.query.apiType = "add";
@@ -556,7 +556,8 @@ module.exports.getCategory = async (req, res, next) => {
             });
             let categories = await Model.Category.aggregate(pipeline);
             pipeline = pipeline.splice(0, pipeline.length - 3);
-            let totalCategories = await Model.Category.aggregate(pipeline);
+            let totalCategory = await Model.Category.aggregate(pipeline);
+            let totalCategories=totalCategory.length;
             category = {
                 categories,
                 totalCategories
@@ -655,15 +656,18 @@ module.exports.getAnimalCategory = async (req, res, next) => {
             limit = req.query.limit ? Number(req.query.limit) : 10;
             let skip = Number((page - 1) * limit);
             let qry = {};
-            if (!req.query.parentId) throw new Error(constants.MESSAGES.PARENT_ID_NOT_FOUND);
+            // if (!req.query.parentId) throw new Error(constants.MESSAGES.PARENT_ID_NOT_FOUND);
             if (req.query.search) {
                 const regex = new RegExp(req.query.search, "i");
                 qry._search = regex;
             }
+            if(req.query.parentId){
+                qry.parentId=req.query.parentId;
+            }
             let pipeline = [];
             pipeline.push({
                 $match: {
-                    parentId: ObjectId(req.query.parentId),
+                    // parentId: ObjectId(req.query.parentId),
                     categoryType: constants.CATEGORY_TYPE.SUBCATEGORY,
                     isDeleted: false
                 }
@@ -686,7 +690,8 @@ module.exports.getAnimalCategory = async (req, res, next) => {
             });
             let categories = await Model.Category.aggregate(pipeline);
             pipeline = pipeline.splice(0, pipeline.length - 3);
-            let totalCategories = await Model.Category.aggregate(pipeline);
+            let totalCategory = await Model.Category.aggregate(pipeline);
+            let totalCategories=totalCategory.length;
             category = {
                 categories,
                 totalCategories
@@ -718,7 +723,7 @@ module.exports.deleteAnimalCategory = async (req, res, next) => {
 module.exports.createPark = async (req, res, next) => {
     try {
         req.query.sideBarId = constants.MODULES.PARK;
-        req.query.apiType = "add"
+        req.query.apiType = "add";
         let isAccess = await services.SubAdmin.checkSubAdmin(req);
         if (isAccess) {
             await Validation.Admin.createPark.validateAsync(req.body);
@@ -761,15 +766,15 @@ module.exports.deletePark=async(req,res,next)=>{
 module.exports.updatePark=async(req,res,next)=>{
     try{
         req.query.sideBarId = constants.MODULES.PARK;
-        req.query.apiType = "add"
+        req.query.apiType = "add";
         let isAccess = await services.SubAdmin.checkSubAdmin(req);
         if(isAccess){
             await Validation.Admin.editPark.validateAsync(req.body);
             let name = req.body.name;
             let nameRegExp = new RegExp('^' + name + '$', 'i');
             let check = await Model.Park.findOne({
-                $ne:{
-                    _id:ObjectId(req.params.id)
+                _id: {
+                    $ne: ObjectId(req.params.id)
                 },
                 name: nameRegExp,
                 isDeleted: false
@@ -793,7 +798,7 @@ module.exports.updatePark=async(req,res,next)=>{
 module.exports.getPark=async(req,res,next)=>{
     try{
         req.query.sideBarId = constants.MODULES.PARK;
-        req.query.apiType = "get"
+        req.query.apiType = "get";
         let isAccess = await services.SubAdmin.checkSubAdmin(req);
         if(isAccess){
             if(req.params.id){
@@ -839,7 +844,8 @@ module.exports.getPark=async(req,res,next)=>{
             let park=await Model.Park.aggregate(pipeline);
             pipeline=pipeline.splice(0,pipeline.length-3);
             let totalCount=await Model.Park.aggregate(pipeline);
-            let data={park,totalCount};
+            let totalParks=totalCount.length;
+            let data={park,totalParks};
             return res.success(constants.MESSAGES.DATA_FETCHED,data);
             }
         }
@@ -894,3 +900,17 @@ module.exports.getCms = async (req, res, next) => {
 };
 
 
+// subadmin
+module.exports.addSubAdmin=async(req,res,next)=>{
+    try{
+        req.query.sideBarId=constants.MODULES.ADMIN;
+        req.query.apiType="add";
+        let isAccess=await services.SubAdmin.checkSubAdmin(req);
+        if(isAccess){
+
+        }
+        throw new Error(constants.MESSAGES.ACCESS_DENIED);
+    }catch(error){
+        next(error);
+    }
+}

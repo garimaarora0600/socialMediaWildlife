@@ -19,7 +19,7 @@ router.get("/getAnimalList",Auth.verify("user"),Controller.UserController.getAni
 
 // posts
 router.post("/addPost",Auth.verify("user"),Controller.UserController.addPosts);
-router.put("/editPost/:import ReactDOM from 'react-dom'",Auth.verify("user"),Controller.UserController.editPosts);
+router.put("/editPost/:id",Auth.verify("user"),Controller.UserController.editPosts);
 router.get("/getPosts",Auth.verify("user"),Controller.UserController.getPosts);
 router.delete("/deletePost/:id",Auth.verify("user"),Controller.UserController.deletePosts);
 
@@ -36,8 +36,11 @@ router.post("/deleteComment/:id",Auth.verify("user"),Controller.UserController.d
 
 
 // filter
-router.post("/filterPark",Auth.verify("user"),Controller.UserController.filtersNationalPark);
+router.get("/filterPark",Auth.verify("user"),Controller.UserController.filtersNationalPark);
 router.post("/filterVisibility",Auth.verify("user"),Controller.UserController.filterVisibility);
 router.post("/myTings",Auth.verify("user"),Controller.UserController.myTings);
 
+
+// manage notifications
+router.get("/manageNotifications",Auth.verify("user"),Controller.UserController.manageNotifications);
 module.exports=router;
